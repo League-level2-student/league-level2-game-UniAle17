@@ -122,6 +122,7 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 
 		System.out.println("action");
 		repaint();
+		//
 		
 		
 	}
