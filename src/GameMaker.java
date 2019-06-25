@@ -19,9 +19,11 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 	Font titleFont;
 	Font messageFont;
 	Timer frameDraw;
-	
+	Matilda matilda;
 	
 	GameMaker(){
+		
+		matilda = new Matilda(250, 700, 50, 50);
 		
 		titleFont = new Font("Chalkduster", Font.PLAIN, 56);
 		messageFont = new Font("Courier New", Font.PLAIN, 30  );
@@ -65,6 +67,9 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, MatildaShades.WIDTH, MatildaShades.HEIGHT);
 		
+		matilda.draw(g);
+       
+		
 		
 	}
 	
@@ -78,11 +83,11 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 		
 		g.setFont(messageFont);
 		g.setColor(Color.BLACK);
-		g.drawString("You caught", 250, 350);
+		g.drawString("You caught", 350, 370);
 		
 		g.setFont(messageFont);
 		g.setColor(Color.BLACK);
-		g.drawString("Press ENTER to restart", 230, 600);
+		g.drawString("Press ENTER to restart", 250, 600);
 		
 	}
 	
