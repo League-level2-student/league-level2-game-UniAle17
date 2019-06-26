@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,11 +22,19 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 	Font messageFont;
 	Timer frameDraw;
 	Matilda matilda;
+	ObjectOrganizer oo;
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = true;
 	
 	GameMaker(){
 		
-		matilda = new Matilda(250, 700, 50, 50);
+		if (needImage) {
+			loadImage("grass.jpg");
+		}
 		
+		matilda = new Matilda(250, 700, 50, 50);
+		oo= new ObjectOrganizer(matilda);
 		titleFont = new Font("Chalkduster", Font.PLAIN, 56);
 		messageFont = new Font("Courier New", Font.PLAIN, 30  );
 		frameDraw= new Timer(1000/60, this);
@@ -32,12 +42,26 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 	
 	}
 	
+	void loadImage(String imageFile) {
+		if (needImage) {
+			try {
+				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+				gotImage = true;
+			} catch (Exception e) {
+
+			}
+			needImage = false;
+		}
+	}
+
+	
 	void updateMenuState(){
 		
 	}
 	
 	void updateGameState() {
-		
+		matilda.update();
+		oo.update();
 	}
 	
 	void updateEndState(){
@@ -64,10 +88,18 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	void drawGameState(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, MatildaShades.WIDTH, MatildaShades.HEIGHT);
 		
-		matilda.draw(g);
+		if (gotImage) {
+			g.drawImage(image, 0, 0, MatildaShades.WIDTH, MatildaShades.HEIGHT, null);
+		}
+
+		else {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, MatildaShades.WIDTH,MatildaShades.HEIGHT);
+		}
+
+		
+		oo.draw(g);
        
 		
 		
@@ -154,20 +186,39 @@ public class GameMaker extends JPanel implements ActionListener, KeyListener{
 		}   
 		
 		if(currentState == GAME) {
-			if(e.getKeyCode()==KeyEvent.VK_LEFT){
-				
-			}
-			if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			
 		}
 		
-	}
-		
-	}
+	
+	
+
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			System.out.println("LEFT");
+			matilda.left = true;
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			System.out.println("RIGHT");
+			matilda.right = true;
+		}
+
+	
+	}	
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+	
+
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			System.out.println("LEFT");
+			matilda.left = false;
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			System.out.println("RIGHT");
+			matilda.right = false;
+		}
 	}
 
 }
