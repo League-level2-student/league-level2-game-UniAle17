@@ -19,7 +19,7 @@ public class Matilda extends GameObjects{
 		    loadImage ("matilda.jpg");
 		}
 		
-		speed=10;
+		speed=20;
 		
 		
 		// TODO Auto-generated constructor stub
@@ -37,11 +37,14 @@ public class Matilda extends GameObjects{
         	g.fillRect(x, y, width, height);
         }
         
+        
 	}
 	
 	void update(){
 		super.update();
 			
+		collisionBox.setBounds(x+110, y-10, width+50, height+70);
+		
 			if(right==true) {
 				x+=speed;
 			}

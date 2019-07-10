@@ -14,17 +14,17 @@ public class Sunglasses extends GameObjects{
 	Sunglasses(int x, int y, int height, int width) {
 		super(x, y, height, width);
 		
-		speed=1;
+		speed=4;
 		
 		if (needImage) {
-		    loadImage ("glasses.png");
+		    loadImage ("sunglasses.png");
 		}
 		
 		// TODO Auto-generated constructor stub
 	}
 
 	void update() {
-		
+		super.update();
 		y+=speed;
 		
 	}
@@ -40,6 +40,8 @@ public class Sunglasses extends GameObjects{
         	g.setColor(Color.BLUE);
         	g.fillRect(x, y, width, height);
         }
+       
+       
         
 	}
 	
