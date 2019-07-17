@@ -103,10 +103,11 @@ public class ObjectOrganizer implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			time++;
-			if(time%5==0) {
-				GameMaker.sunglassesSpawn.setDelay(GameMaker.sunglassesSpawn.getDelay()-10);
+			if(GameMaker.sunglassesSpawn.getDelay() > 1000) {
+				GameMaker.sunglassesSpawn.setDelay(GameMaker.sunglassesSpawn.getDelay()-100);
 			}
+			
+			
 			addSunglasses();
 		}
 	
